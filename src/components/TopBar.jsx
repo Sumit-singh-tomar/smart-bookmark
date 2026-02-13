@@ -36,11 +36,11 @@ export default function TopBar() {
                         <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
                             <span className="text-white font-bold text-xl">B</span>
                         </div>
-                        <span className="text-xl font-semibold text-gray-800">Smart Bookmark</span>
+                        <span className="text-sm md:text-xl font-semibold text-gray-800">Smart Bookmark</span>
                     </div>
 
                     {/* User Info and Logout */}
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-0 md:space-x-4">
                         <div className="flex items-center space-x-3">
                             {
                                 imgError ?
@@ -62,10 +62,10 @@ export default function TopBar() {
 
                         <button
                             onClick={handleLogout}
-                            className="cursor-pointer flex items-center ml-4 bg-red-100 space-x-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-red-900 hover:bg-red-200 rounded-lg transition-colors duration-200"
+                            className="cursor-pointer flex items-center ml-0 md:ml-4 space-x-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-red-900 hover:bg-red-100 rounded-lg transition-colors duration-200"
                         >
-                            <LogOut className="w-4 h-4" />
-                            <span>Logout</span>
+                            <LogOut className="w-5 h-5" />
+                            {<span className="hidden md:block">Logout</span>}
                         </button>
                     </div>
                 </div>

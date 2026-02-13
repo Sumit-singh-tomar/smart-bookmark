@@ -1,6 +1,4 @@
-// src/lib/auth.js
 import User from "@/models/User";
-import Member from "@/models/User";
 import jwt from "jsonwebtoken";
 
 export const verifyJwt = async (req) => {

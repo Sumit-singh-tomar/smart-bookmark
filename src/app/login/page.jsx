@@ -16,20 +16,20 @@ export default function LoginPage() {
             <div className="flex justify-center">
               <div className="relative">
                 <div className="absolute inset-0 animate-ping">
-                  <div className="w-20 h-20 bg-black rounded-full opacity-20"></div>
+                  <div className="w-24 h-24 bg-white rounded-full opacity-20"></div>
                 </div>
-                <div className="relative w-20 h-20">
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-pink-600 rounded-full blur"></div>
-                  <div className="relative flex items-center justify-center w-full h-full bg-gray-900 rounded-full">
-                    <div className="text-white text-xs">BookMark</div>
+                <div className="relative w-24 h-24">
+                  {/* <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur"></div> */}
+                  <div className="relative border-2 border-white flex items-center justify-center w-full h-full bg-purple-500 rounded-full">
+                    <div className="text-white text-xs">Bookmark.com</div>
                   </div>
                 </div>
               </div>
             </div>
-            <h2 className="mt-6 text-4xl font-bold text-white">
+            <h2 className="mt-6 text-2xl md:text-4xl font-bold text-white">
               Welcome Back
             </h2>
-            <p className="mt-2 text-lg text-gray-300">
+            <p className="mt-2 text-sm md:text-lg text-gray-300">
               {user?.email ? `Signed in as ${user?.email}` : "Sign in to your account to continue"}
             </p>
           </div>
@@ -43,7 +43,7 @@ export default function LoginPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
-                <p className="text-white">Secure authentication with Google</p>
+                <p className="text-white text-xs md:text-lg">Secure authentication with Google</p>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="flex-shrink-0">
@@ -51,7 +51,7 @@ export default function LoginPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
-                <p className="text-white">No password to remember</p>
+                <p className="text-white text-xs md:text-lg">No password to remember</p>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="flex-shrink-0">
@@ -59,7 +59,7 @@ export default function LoginPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
-                <p className="text-white">One-click sign in</p>
+                <p className="text-white text-xs md:text-lg">One-click sign in</p>
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function LoginPage() {
             user?._id ?
               <div className="mt-8">
                 <button
-                  className="cursor-pointer group relative w-full flex items-center justify-center px-6 py-3 
+                  className="cursor-pointer group relative w-full flex items-center justify-center px-6 py-3
                  bg-white hover:bg-gray-50 
                  border-2 border-transparent 
                  rounded-xl 
@@ -81,7 +81,7 @@ export default function LoginPage() {
                   onClick={() => router.push('/dashboard')}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
-                  <span className="text-lg">Continue to Dashboard</span>
+                  <span className="text-sm md:text-lg ">Continue to Dashboard</span>
                 </button>
               </div>
               :
@@ -91,7 +91,7 @@ export default function LoginPage() {
           }
 
           <div className="text-center mt-8">
-            <p className="text-sm text-white">
+            <p className="text-xs md:text-sm text-white">
               By signing in, you agree to our{' '}
               <a href="#" className="font-medium text-pink-400 hover:text-pink-300 transition-colors">
                 Terms of Service
