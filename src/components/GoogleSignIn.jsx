@@ -1,29 +1,81 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import api from '@/lib/axios';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { setUser } from '@/redux/slices/userSlices';
+import { useDispatch } from 'react-redux';
 
 export default function GoogleSignIn() {
+  const googleBtnRef = useRef(null);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const router = useRouter();
 
-  const handleGoogleSignIn = async () => {
+  const handleOneTapSignIn = async (response) => {
     try {
       setIsLoading(true);
-      if (!window.google) {
-        console.error("Google script not loaded yet");
-        return;
+
+      const { data } = await api.post('/api/auth/google', {
+        idToken: response.credential,
+      });
+
+      if (data?.status === true) {
+        dispatch(setUser(data?.user));
+        toast.success('Google sign-in successful');
+        router.push('dashboard');
+      } else {
+        toast.error(data?.message || 'Google sign-in failed');
       }
 
+      console.log('Google sign-in successful:', data);
+    } catch (error) {
+      console.error(
+        'Google sign-in failed:',
+        error.response?.data || error.message
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const initGoogleSignIn = () => {
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
       google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        callback: (response) => {
-          console.log("ID Token:", response.credential);
-        },
-        
+        callback: handleOneTapSignIn,
       });
 
       google.accounts.id.prompt();
+
+      window.google.accounts.id.renderButton(googleBtnRef.current, {
+        theme: 'outline',
+        size: 'large',
+        width: 360,
+        type: 'standard',
+      });
+
+      setIsReady(true);
+    };
+  };
+
+  useEffect(() => {
+    initGoogleSignIn();
+  }, []);
+
+
+  const handleGoogleSignIn = async () => {
+    try {
+      googleBtnRef.current.querySelector('div[role=button]')?.click();
+
     } catch (error) {
       console.error('Google sign-in error:', error);
       setIsLoading(false);
@@ -32,9 +84,14 @@ export default function GoogleSignIn() {
 
   return (
     <div className="relative">
+      <div
+        ref={googleBtnRef}
+        className="absolute inset-0 opacity-0 pointer-events-none"
+      />
+
       <button
         onClick={handleGoogleSignIn}
-        disabled={isLoading}
+        disabled={!isReady || isLoading}
         className="cursor-pointer group relative w-full flex items-center justify-center px-6 py-3 
                  bg-white hover:bg-gray-50 
                  border-2 border-transparent 
