@@ -41,6 +41,11 @@ export default function GoogleSignIn() {
     }
   };
 
+  const calculateWidth = () => {
+    if (window.innerWidth < 400) return 280;
+    if (window.innerWidth < 640) return 300;
+    return 360;
+  };
   const initGoogleSignIn = () => {
     const script = document.createElement('script');
     script.src = 'https://accounts.google.com/gsi/client';
@@ -54,13 +59,17 @@ export default function GoogleSignIn() {
         callback: handleOneTapSignIn,
       });
 
-      // google.accounts.id.prompt();
+      google.accounts.id.prompt();
+
+      const width = calculateWidth();
 
       window.google.accounts.id.renderButton(googleBtnRef.current, {
         theme: 'outline',
         size: 'large',
-        width: 360,
+        width: width,
+        text: 'continue_with',
         type: 'standard',
+        shape: 'pill',
       });
 
       setIsReady(true);
@@ -84,13 +93,14 @@ export default function GoogleSignIn() {
   };
 
   return (
-    <div className="relative">
-      <div
-        ref={googleBtnRef}
-        className="absolute inset-0 opacity-0 pointer-events-none"
-      />
+    <div className="group relative w-full max-w-md mx-auto">
+      {/* <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 blur opacity-30 group-hover:opacity-60 transition" /> */}
 
-      <button
+      <div className="flex justify-center">
+        <div ref={googleBtnRef} />
+      </div>
+
+      {/* <button
         onClick={handleGoogleSignIn}
         disabled={!isReady || isLoading}
         className="cursor-pointer group relative w-full flex items-center justify-center px-6 py-3 
@@ -103,8 +113,8 @@ export default function GoogleSignIn() {
                  disabled:opacity-70 disabled:cursor-not-allowed 
                  disabled:hover:scale-100
                  shadow-lg hover:shadow-xl"
-      >
-        {isLoading ? (
+      > */}
+      {/* {isLoading ? (
           <div className="flex items-center space-x-3">
             <div className="w-5 h-5 border-t-2 border-b-2 border-gray-700 rounded-full animate-spin"></div>
             <span>Connecting...</span>
@@ -135,8 +145,8 @@ export default function GoogleSignIn() {
             </svg>
             <span className="text-lg">Continue with Google</span>
           </>
-        )}
-      </button>
-    </div>
+        )} */}
+      {/* </button> */}
+    </div >
   );
 }
