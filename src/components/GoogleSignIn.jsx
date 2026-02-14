@@ -74,7 +74,7 @@ export default function GoogleSignIn() {
 
   const handleGoogleSignIn = async () => {
     try {
-      
+      console.log('Google sign-in button clicked', googleBtnRef.current);
       googleBtnRef.current.querySelector('div[role=button]')?.click();
 
     } catch (error) {
