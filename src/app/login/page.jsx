@@ -65,7 +65,7 @@ export default function LoginPage() {
           </div>
 
           {
-            !user?._id ?
+            user?._id ?
               <div className="mt-8">
                 <button
                   className="cursor-pointer group relative w-full flex items-center justify-center px-6 py-3
