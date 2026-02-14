@@ -65,7 +65,7 @@ export default function LoginPage() {
           </div>
 
           {
-            user?._id ?
+            !user?._id ?
               <div className="mt-8">
                 <button
                   className="cursor-pointer group relative w-full flex items-center justify-center px-6 py-3
@@ -80,7 +80,7 @@ export default function LoginPage() {
                  shadow-lg hover:shadow-xl"
                   onClick={() => router.push('/dashboard')}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-purple-400 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                   <span className="text-sm md:text-lg ">Continue to Dashboard</span>
                 </button>
               </div>

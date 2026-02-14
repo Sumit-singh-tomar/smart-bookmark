@@ -69,7 +69,6 @@ export default function GoogleSignIn() {
         width: width,
         text: 'continue_with',
         type: 'standard',
-        shape: 'pill',
       });
 
       setIsReady(true);
