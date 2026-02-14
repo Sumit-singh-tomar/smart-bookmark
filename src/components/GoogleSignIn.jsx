@@ -54,7 +54,7 @@ export default function GoogleSignIn() {
         callback: handleOneTapSignIn,
       });
 
-      google.accounts.id.prompt();
+      // google.accounts.id.prompt();
 
       window.google.accounts.id.renderButton(googleBtnRef.current, {
         theme: 'outline',
